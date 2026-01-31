@@ -1,4 +1,7 @@
-const API_BASE_URL = 'http://localhost:3000/api';
+
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:3000/api' 
+  : 'https://task-management-backend-upqk.onrender.com/api'; 
 
 const getToken = () => {
   return localStorage.getItem('token');
