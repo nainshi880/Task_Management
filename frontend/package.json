@@ -4,7 +4,9 @@
   "description": "Task Management Frontend",
   "scripts": {
     "start": "npx http-server public -p 8080 -o -c-1",
-    "dev": "npx http-server public -p 8080 -o -c-1"
+    "dev": "npx http-server public -p 8080 -o -c-1",
+    "build": "echo 'No build step required for static site'",
+    "vercel-build": "echo 'No build step required for static site'"
   },
   "keywords": ["task", "management", "frontend"],
   "author": "",
