@@ -1,0 +1,15 @@
+{
+  "name": "task-management-frontend",
+  "version": "1.0.0",
+  "description": "Task Management Frontend",
+  "scripts": {
+    "start": "npx http-server public -p 8080 -o -c-1",
+    "dev": "npx http-server public -p 8080 -o -c-1"
+  },
+  "keywords": ["task", "management", "frontend"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management App</title>
+    <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body>
+    <div id="auth-section" class="auth-container">
+        <div class="auth-card">
+            <h1>Task Management</h1>
+            
+            <div id="login-form" class="auth-form active">
+                <h2>Login</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('loginPassword', 'loginPasswordToggle')" id="loginPasswordToggle">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-off-icon" style="display: none;">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p class="auth-switch">Don't have an account? <a href="#" id="showRegister">Register</a></p>
+            </div>
+
+            <div id="register-form" class="auth-form">
+                <h2>Register</h2>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerUsername">Username</label>
+                        <input type="text" id="registerUsername" placeholder="Enter your username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="registerPassword" placeholder="Enter your password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('registerPassword', 'registerPasswordToggle')" id="registerPasswordToggle">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-off-icon" style="display: none;">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <small class="password-hint">Password must be at least 6 characters and contain uppercase, lowercase, and special characters</small>
+                        <div class="password-requirements hidden" id="passwordRequirements">
+                            <div class="requirement" id="reqLength">
+                                <span class="req-icon">✗</span>
+                                <span>At least 6 characters</span>
+                            </div>
+                            <div class="requirement" id="reqUppercase">
+                                <span class="req-icon">✗</span>
+                                <span>One uppercase letter (A-Z)</span>
+                            </div>
+                            <div class="requirement" id="reqLowercase">
+                                <span class="req-icon">✗</span>
+                                <span>One lowercase letter (a-z)</span>
+                            </div>
+                            <div class="requirement" id="reqSpecial">
+                                <span class="req-icon">✗</span>
+                                <span>One special character (!@#$%^&*)</span>
+                            </div>
+                        </div>
+                        <div class="password-strength hidden" id="passwordStrength"></div>
+                        <div class="password-error" id="passwordError"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+                <p class="auth-switch">Already have an account? <a href="#" id="showLogin">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-section" class="app-container hidden">
+        <header class="app-header">
+            <h1>Task Management</h1>
+            <div class="user-info">
+                <span id="userName"></span>
+                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+            </div>
+        </header>
+
+        <main class="app-main">
+
+            <section class="task-form-section">
+                <div class="card">
+                    <h2 id="formTitle">Add New Task</h2>
+                    <form id="taskForm">
+                        <input type="hidden" id="taskId">
+                        <div class="form-group">
+                            <label for="taskTitle">Title *</label>
+                            <input type="text" id="taskTitle" required placeholder="Enter task title">
+                        </div>
+                        <div class="form-group">
+                            <label for="taskDescription">Description</label>
+                            <textarea id="taskDescription" rows="3" placeholder="Enter task description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskStatus">Status</label>
+                            <select id="taskStatus">
+                                <option value="pending">Pending</option>
+                                <option value="in_progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" id="submitBtn">Add Task</button>
+                            <button type="button" class="btn btn-secondary" id="cancelBtn" style="display: none;">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="filters-section">
+                <div class="filters">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search tasks...">
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-status="all">All</button>
+                        <button class="filter-btn" data-status="pending">Pending</button>
+                        <button class="filter-btn" data-status="in_progress">In Progress</button>
+                        <button class="filter-btn" data-status="completed">Completed</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tasks-section">
+                <div id="tasksContainer" class="tasks-container">
+                    <p class="empty-message">No tasks found. Create your first task!</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script type="module" src="src/main.js"></script>
+    <script>
+        function togglePassword(inputId, toggleId) {
+            const input = document.getElementById(inputId);
+            const toggle = document.getElementById(toggleId);
+            const eyeIcon = toggle.querySelector('.eye-icon');
+            const eyeOffIcon = toggle.querySelector('.eye-off-icon');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                eyeIcon.style.display = 'none';
+                eyeOffIcon.style.display = 'block';
+            } else {
+                input.type = 'password';
+                eyeIcon.style.display = 'block';
+                eyeOffIcon.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+
